@@ -1181,6 +1181,10 @@ global:
   acceptedUpstreamSnapshot: scripts/architecture/upstream-snapshot.json
 
 exceptions:
+  - id: guarded-project-local-deletion-exemption
+    rule: unmanaged-new-file
+    paths: [apps/zcode-cli/packages/core/src/tool/handlers/guarded/project-exemption.ts]
+    reason: guarded 危险命令匹配旁的项目内删除豁免（目标全部落在 workspace 根内则跳过单次确认）；与同目录已有 command/find/git 解析器同属未受管的 zcode-cli tool handlers，接管整个 handlers 目录需要单独的模块边界整理。
   - id: session-features-attribution-header-edit
     rule: unmanaged-new-file
     paths: [apps/zcode-cli/packages/adapters/src/model/runner-attribution.ts]
